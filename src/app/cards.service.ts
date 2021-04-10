@@ -14,7 +14,11 @@ export class CardsService {
     return this.#cards;
   }
 
-  addCard(name: string, number: string): void {
-    this.#cards.push(new Card(name, number));
+  addCard(name: string, number: string): Card {
+    const newCard = new Card(name, number);
+
+    this.#cards.push(newCard);
+
+    return newCard;
   }
 }

@@ -1,1 +1,9 @@
-{{ title }} app is running!
+<form (submit)="onSubmit($event)">
+  <input type="text" name="name" [(ngModel)]="name" />
+  <input type="text" name="number" [(ngModel)]="number" />
+  <button>Add Card</button>
+</form>
+
+<ul>
+  <li *ngFor="let card of cards">{{ card.name }} - {{ card.number }}</li>
+</ul>

@@ -15,8 +15,10 @@ describe("CardsService", () => {
   });
 
   it("should add a card", () => {
-    service.addCard("card-name", "card-number");
+    const result = service.addCard("card-name", "card-number");
+    const expectedCard = new Card("card-name", "card-number"); 
 
-    expect(service.cards).toEqual([new Card("card-name", "card-number")]);
+    expect(result).toEqual(expectedCard);
+    expect(service.cards).toEqual([expectedCard]);
   });
 });
