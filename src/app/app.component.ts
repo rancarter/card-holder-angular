@@ -13,7 +13,7 @@ export class AppComponent {
 
   constructor(private cardsService: CardsService) {}
 
-  onSubmit(event: any) {
+  onSubmit(event: Event) {
     event.preventDefault();
 
     this.cardsService.addCard(this.name, this.number);
