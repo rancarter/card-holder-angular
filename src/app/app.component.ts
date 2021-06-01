@@ -1,24 +1,18 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
-import { CardsService, Card } from "./cards.service";
+import { CardsService, Card } from './cards.service';
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   public cards: Card[] = this.cardsService.cards;
-  public name: string = "dsfsdf";
-  public number: string = "sdfsd";
 
   constructor(private cardsService: CardsService) {}
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-
-    this.cardsService.addCard(this.name, this.number);
+  onSubmit(data: any) {
+    this.cardsService.addCard(data.name, data.number);
     this.cards = this.cardsService.cards;
-    this.name = "";
-    this.number = "";
   }
 }

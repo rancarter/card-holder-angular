@@ -1,8 +1,4 @@
-<form (submit)="onSubmit($event)">
-  <input type="text" name="name" [(ngModel)]="name" />
-  <input type="text" name="number" [(ngModel)]="number" />
-  <button>Add Card</button>
-</form>
+<app-card-form (formSubmit)="onSubmit($event)"> </app-card-form>
 
 <ul>
   <li *ngFor="let card of cards">{{ card.name }} - {{ card.number }}</li>

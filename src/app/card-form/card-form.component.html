@@ -1,1 +1,5 @@
-<p>card-form works!</p>
+<form (submit)="onSubmit($event)">
+  <input type="text" name="name" [(ngModel)]="name" />
+  <input type="text" name="number" [(ngModel)]="number" />
+  <button>Add Card</button>
+</form>

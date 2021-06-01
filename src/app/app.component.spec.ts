@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
-import { Card } from "./cards.service";
 import { AppComponent } from "./app.component";
 
 describe("AppComponent", () => {
@@ -19,24 +18,6 @@ describe("AppComponent", () => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it("should render input", () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const inputs = element.querySelectorAll("input");
-
-    expect(inputs).toHaveSize(2);
-  });
-
-  it("should add a card and clear data", () => {
-    component.name = "name";
-    component.number = "number";
-
-    component.onSubmit(new Event("submit"));
-
-    expect(component.name).toBe("");
-    expect(component.name).toBe("");
-    expect(component.cards).toEqual([new Card("name", "number")]);
   });
 
   xit("should add a card and clear data (integration)", () => {
@@ -64,6 +45,6 @@ describe("AppComponent", () => {
     fixture.detectChanges();
 
     expect(element.querySelector<HTMLInputElement>("input[name='name']")!.value).toBe("");
-    // expect(numberInput!.value).toBe('');
+    expect(numberInput!.value).toBe('');
   });
 });

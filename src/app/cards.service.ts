@@ -1,11 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 export class Card {
   constructor(public name: string, public number: string) {}
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class CardsService {
   #cards: Card[] = [];
@@ -20,5 +20,9 @@ export class CardsService {
     this.#cards.push(newCard);
 
     return newCard;
+  }
+
+  removeCard(cardNumber: string): void {
+    this.#cards = this.#cards.filter((card) => card.number !== cardNumber);
   }
 }

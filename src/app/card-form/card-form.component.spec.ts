@@ -22,4 +22,14 @@ describe('CardFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it("should add a card and clear data", () => {
+    component.name = "name";
+    component.number = "number";
+
+    component.onSubmit(new Event("submit"));
+
+    expect(component.name).toBe("");
+    expect(component.name).toBe("");
+  });
 });
