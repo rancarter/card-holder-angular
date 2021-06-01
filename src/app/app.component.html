@@ -1,5 +1,3 @@
 <app-card-form (formSubmit)="onSubmit($event)"> </app-card-form>
 
-<ul>
-  <li *ngFor="let card of cards">{{ card.name }} - {{ card.number }}</li>
-</ul>
+<app-card-list [cards]="cards"></app-card-list>
