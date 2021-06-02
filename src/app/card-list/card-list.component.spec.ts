@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { Card } from '../cards.service';
 import { CardListComponent } from './card-list.component';
 
 describe('CardListComponent', () => {
@@ -8,9 +9,8 @@ describe('CardListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardListComponent ]
-    })
-    .compileComponents();
+      declarations: [CardListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +19,19 @@ describe('CardListComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should render cards', () => {
+    const cards = [
+      new Card('name 1', 'number 1'),
+      new Card('name 2', 'number 2'),
+    ];
+
+    component.cards = cards;
+    fixture.detectChanges();
+
+    const list = fixture.nativeElement.querySelectorAll('li');
+
+    expect(list.length).toBe(2);
+    expect(list[0].textContent).toBe('name 1 - number 1');
+    expect(list[1].textContent).toBe('name 2 - number 2');
   });
 });

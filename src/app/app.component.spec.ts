@@ -1,15 +1,19 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { AppComponent } from "./app.component";
+import { AppComponent } from './app.component';
+import { Card, CardsService } from './cards.service';
 
-describe("AppComponent", () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+
+  const cardService = jasmine.createSpyObj('CardsService', ['addCard']);
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [AppComponent],
+        providers: [{ provide: CardsService, useValue: cardService }],
       }).compileComponents();
     })
   );
@@ -20,31 +24,12 @@ describe("AppComponent", () => {
     fixture.detectChanges();
   });
 
-  xit("should add a card and clear data (integration)", () => {
-    const element: HTMLElement = fixture.nativeElement;
-    const nameInput =
-      element.querySelector<HTMLInputElement>("input[name='name']");
-    const numberInput = element.querySelector<HTMLInputElement>(
-      "input[name='number']"
-    );
-    const button = element.querySelector<HTMLButtonElement>("button");
+  it('should call cardService addCard method', () => {
+    cardService.cards = [new Card('name', 'number')];
 
-    if (!nameInput || !numberInput || !button) {
-      throw new Error("Element not found");
-    }
+    component.onSubmit({ name: 'name', number: 'number' });
 
-    nameInput.value = "card name";
-    numberInput.value = "card number";
-
-    nameInput.dispatchEvent(new Event("input"));
-    numberInput.dispatchEvent(new Event("input"));
-
-    button.click();
-    button.dispatchEvent(new Event("click"));
-
-    fixture.detectChanges();
-
-    expect(element.querySelector<HTMLInputElement>("input[name='name']")!.value).toBe("");
-    expect(numberInput!.value).toBe('');
+    expect(cardService.addCard).toHaveBeenCalledWith('name', 'number');
+    expect(component.cards).toEqual(cardService.cards);
   });
 });

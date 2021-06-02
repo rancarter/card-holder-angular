@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { CardsService, Card } from './cards.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,7 +12,7 @@ export class AppComponent {
 
   constructor(private cardsService: CardsService) {}
 
-  onSubmit(data: any) {
+  onSubmit(data: { name: string; number: string }) {
     this.cardsService.addCard(data.name, data.number);
     this.cards = this.cardsService.cards;
   }
