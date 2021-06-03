@@ -1,4 +1,4 @@
 <div class="container">
   <app-card-form (formSubmit)="onSubmit($event)"></app-card-form>
-  <app-card-list [cards]="cards"></app-card-list>
+  <app-card-list [cards]="cards" (remove)="onRemove($event)"></app-card-list>
 </div>

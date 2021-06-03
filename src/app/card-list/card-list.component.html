@@ -1,3 +1,6 @@
 <ul>
-  <li *ngFor="let card of cards">{{ card.name }} - {{ card.number }}</li>
+  <li *ngFor="let card of cards;">
+    {{ card.name }} - {{ card.number }}
+    <button (click)="onRemove(card.number)">Remove</button>
+  </li>
 </ul>

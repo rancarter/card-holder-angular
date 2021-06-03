@@ -31,7 +31,7 @@ describe('CardListComponent', () => {
     const list = fixture.nativeElement.querySelectorAll('li');
 
     expect(list.length).toBe(2);
-    expect(list[0].textContent).toBe('name 1 - number 1');
-    expect(list[1].textContent).toBe('name 2 - number 2');
+    expect(list[0].textContent).toContain('name 1 - number 1');
+    expect(list[1].textContent).toContain('name 2 - number 2');
   });
 });

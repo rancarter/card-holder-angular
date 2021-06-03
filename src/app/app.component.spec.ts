@@ -7,7 +7,7 @@ describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  const cardService = jasmine.createSpyObj('CardsService', ['addCard']);
+  const cardService = jasmine.createSpyObj('CardsService', ['addCard', 'removeCard']);
 
   beforeEach(
     waitForAsync(() => {
@@ -25,11 +25,20 @@ describe('AppComponent', () => {
   });
 
   it('should call addCard', () => {
-    cardService.cards = [new Card('name', 'number')];
+    cardService.cards = [];
 
     component.onSubmit({ name: 'name', number: 'number' });
 
     expect(cardService.addCard).toHaveBeenCalledWith('name', 'number');
-    expect(component.cards).toEqual(cardService.cards);
+    expect(component.cards).toBe(cardService.cards);
   });
+
+  it('should call addCard', () => {
+    cardService.cards = [];
+
+    component.onRemove('number');
+
+    expect(cardService.removeCard).toHaveBeenCalledWith('number');
+    expect(component.cards).toBe(cardService.cards);
+  }); 
 });
