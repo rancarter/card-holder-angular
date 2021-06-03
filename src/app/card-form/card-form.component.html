@@ -1,5 +1,24 @@
 <form (submit)="onSubmit($event)">
-  <input type="text" name="name" [(ngModel)]="name" />
-  <input type="text" name="number" [(ngModel)]="number" />
+  <div class="field">
+    <input
+      type="text"
+      name="name"
+      placeholder="Card name"
+      [(ngModel)]="name"
+      [ngClass]="errors.name ? 'input-error' : ''"
+    />
+    <div class="error">{{ errors.name }}</div>
+  </div>
+
+  <div class="field">
+    <input
+      type="text"
+      name="number"
+      placeholder="Card number"
+      [(ngModel)]="number"
+      [ngClass]="errors.number ? 'input-error' : ''"
+    />
+    <div class="error">{{ errors.number }}</div>
+  </div>
   <button>Add Card</button>
 </form>

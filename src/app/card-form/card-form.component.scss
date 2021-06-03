@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  align-items: baseline;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  padding: 8px;
+}
+
+.field {
+  margin-right: 10px;
+}
+
+.error {
+  color: darkred;
+}
+
+.input-error {
+  border-color: darkred;
+}

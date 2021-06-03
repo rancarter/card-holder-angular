@@ -24,7 +24,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should call cardService addCard method', () => {
+  it('should call addCard', () => {
     cardService.cards = [new Card('name', 'number')];
 
     component.onSubmit({ name: 'name', number: 'number' });
