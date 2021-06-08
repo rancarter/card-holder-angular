@@ -1,8 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 interface Errors {
   name?: string;
-  number?: string;
+  cardNumber?: string;
 }
 @Component({
   selector: 'app-card-form',
@@ -10,32 +11,50 @@ interface Errors {
   styleUrls: ['./card-form.component.scss'],
 })
 export class CardFormComponent {
-  name: string = '';
-  number: string = '';
-  errors: Errors = {};
-  @Output() formSubmit = new EventEmitter<{ name: string; number: string }>();
+  cardForm = this.fb.group({
+    name: ['', Validators.required],
+    cardNumber: ['', Validators.required],
+  });
+  isBecomeInvalid: boolean = false;
 
-  validate(): boolean {
-    this.errors.name = this.name.length ? undefined : 'Required';
-    this.errors.number = this.number.length ? undefined : 'Required';
+  @Output() formSubmit = new EventEmitter<{
+    name: string;
+    cardNumber: string;
+  }>();
 
-    return Boolean(!this.errors.name && !this.errors.number);
+  constructor(private fb: FormBuilder) {
+    this.cardForm.valueChanges.subscribe((form) => {
+      if (this.cardForm.invalid) {
+        if (!this.isBecomeInvalid) {
+          console.log('Invalid form');
+        }
+
+        this.isBecomeInvalid = true;
+      } else {
+        this.isBecomeInvalid = false;
+      }
+    });
   }
 
-  clearError(fieldName: keyof Errors): void {
-    this.errors[fieldName] = undefined;
+  get formErrors(): Errors {
+    const controls = this.cardForm.controls;
+    const errors = Object.entries(controls)
+      .filter(([name, control]) => control.touched && control.invalid)
+      .map(([name]) => [name, 'Required'])
+      .reduce((acc, [name, value]) => {
+        return { ...acc, [name]: value };
+      }, {});
+
+    return errors;
   }
 
-  onSubmit(event: Event) {
-    event.preventDefault();
-
-    if (!this.validate()) {
+  onSubmit() {
+    console.log(this.cardForm);
+    if (this.cardForm.invalid) {
       return;
     }
 
-    this.formSubmit.emit({ name: this.name, number: this.number });
-
-    this.name = '';
-    this.number = '';
+    this.formSubmit.emit(this.cardForm.value);
+    this.cardForm.reset();
   }
 }

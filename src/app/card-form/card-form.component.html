@@ -1,13 +1,12 @@
-<form (submit)="onSubmit($event)">
+<form (ngSubmit)="onSubmit()" [formGroup]="cardForm">
   <div class="field">
     <input
       type="text"
       name="name"
       placeholder="Card name"
-      [(ngModel)]="name"
-      [ngClass]="errors.name ? 'input-error' : ''"
+      formControlName="name"
     />
-    <div class="error">{{ errors.name }}</div>
+    <div class="error">{{ formErrors.name }}</div>
   </div>
 
   <div class="field">
@@ -15,10 +14,9 @@
       type="text"
       name="number"
       placeholder="Card number"
-      [(ngModel)]="number"
-      [ngClass]="errors.number ? 'input-error' : ''"
+      formControlName="cardNumber"
     />
-    <div class="error">{{ errors.number }}</div>
+    <div class="error">{{ formErrors.cardNumber }}</div>
   </div>
   <button>Add Card</button>
 </form>

@@ -8,17 +8,17 @@ import { CardsService, Card } from './cards.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  public cards: Card[] = this.cardsService.cards;
-
   constructor(private cardsService: CardsService) {}
 
-  onSubmit(data: { name: string; number: string }): void {
-    this.cardsService.addCard(data.name, data.number);
-    this.cards = this.cardsService.cards;
+  get cards(): Card[] {
+    return this.cardsService.cards
+  }
+
+  onSubmit(data: { name: string; cardNumber: string }): void {
+    this.cardsService.addCard(data.name, data.cardNumber);
   }
 
   onRemove(cardNumber: string): void {
     this.cardsService.removeCard(cardNumber);
-    this.cards = this.cardsService.cards;
   }
 }
